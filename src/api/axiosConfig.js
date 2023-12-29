@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const JAVA_BASE_URL = process.env.REACT_APP_BASE_URL
+
 export default axios.create({
-  baseURL: "https://1118-129-205-124-243.ngrok-free.app",
+  baseURL: JAVA_BASE_URL,
   // baseURL: "http://localhost:8080",
-  headers: {"ngrok-skip-browser-warning": "true"}
+  // headers: {"ngrok-skip-browser-warning": "true"}
 })
