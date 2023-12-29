@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: movie-prod-fronted
+  name: movie-prod-frontend
 spec:
   replicas: 1
   selector:
@@ -15,14 +15,14 @@ spec:
   template:
     metadata:
       labels:
-        app: movie-prod-api
+        app: movie-prod-frontend
     spec:
       containers:
       - image: gcr.io/ise-test-404109/movie-prod-frontend:latest
-        name: movie-prod-api
+        name: movie-prod-frontend
         imagePullPolicy: Always
         ports:
-          - containerPort: 8080
+          - containerPort: 3006
         envFrom:
           - secretRef:
               name: movie-frontend-secret
@@ -39,6 +39,6 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 8080
+    targetPort: 3006
   selector:
     app: movie-prod-frontend
