@@ -22,7 +22,7 @@ spec:
         name: movie-prod-frontend
         imagePullPolicy: Always
         ports:
-          - containerPort: 3006
+          - containerPort: 3000
         envFrom:
           - secretRef:
               name: movie-frontend-secret
@@ -39,6 +39,6 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 3006
+    targetPort: 3000
   selector:
     app: movie-prod-frontend
