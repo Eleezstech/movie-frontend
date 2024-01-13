@@ -19,11 +19,9 @@ function App() {
 
     try {
       const response = await api.get("/api/v1/movies")
-      console.log(response.data)
       setMovies(response.data)
 
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -36,7 +34,6 @@ function App() {
       setReviews(singleMovie.reviews)
 
     } catch (error) {
-      console.log(error)
     }
   }
 
