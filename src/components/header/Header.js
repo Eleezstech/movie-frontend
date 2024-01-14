@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <Navbar bg='dark' variant='dark' expand='lg'>
+    <Navbar bg='black' variant='dark' expand='lg'>
       <Container fluid>
         <Navbar.Brand href="/" style={{"color": 'gold'}}>
           <FontAwesomeIcon icon={faVideoSlash}> </FontAwesomeIcon>Gold

@@ -14,7 +14,7 @@ body{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: black;
+  background-color: #0e171b;
   color: white;
   margin-top: 10px;
 }
