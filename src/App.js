@@ -3,7 +3,8 @@ import api from './api/axiosConfig'
 import { useState, useEffect } from 'react';
 import Layout from './components/layout';
 import { Route, Routes } from 'react-router-dom';
-import Home from './components/home/Home';
+import Home from './pages/home/Home';
+import Movie from './pages/movie/movie';
 import Header from './components/header/Header';
 import Trailer from './components/trailer/Trailer';
 import Reviews from './components/reviews/Reviews';
@@ -45,11 +46,12 @@ function App() {
     <div className="App">
     <Header/>
       <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route path='/' element={<Home movies={movies}/>}> </Route>
-          <Route path='/trailer/:ytTrailerId' element={<Trailer/>}></Route>
-          <Route path='/reviews/:movieId' element={<Reviews getMovieData = {getMovieData} movie={movie} reviews = {reviews} setReviews = {setReviews} />}></Route>
-          <Route path='*' element={<NotFound/>}></Route>
+        <Route path="/" element={<Layout/>}>
+          <Route path="/" element={<Home movies={movies}/>}> </Route>
+          <Route path="/movie/:id" element={<Movie />}> </Route>
+          <Route path="/trailer/:ytTrailerId" element={<Trailer/>}></Route>
+          <Route path="/reviews/:movieId" element={<Reviews getMovieData = {getMovieData} movie={movie} reviews = {reviews} setReviews = {setReviews} />}></Route>
+          <Route path="*" element={<NotFound/>}></Route>
         </Route>
       </Routes>
     </div>
