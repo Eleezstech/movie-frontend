@@ -9,7 +9,7 @@ function Movie({movie}) {
                 to={`/movie/${movie.imdbId}`}
                 state = { movie }
             >
-                <img src={movie.poster} className="h-75 w-100 rounded-3 movie-hover" alt="movie poster"></img>
+                <img src={movie.poster} className="h-75 w-100 rounded-3 movie-hover shadow-lg" alt="movie poster"></img>
             </Link>
             <div className="mt-3">
                 <h5 className="fs-6 fw-bold text-primary">{movie.title}</h5>
