@@ -10,7 +10,7 @@ function Movie() {
         <div className="mt-5 text-light">
             <div className="container">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-10 col-md-7">
                         <div className="player-wrapper">
                             <ReactPlayer 
                                 controls={false}
@@ -24,11 +24,11 @@ function Movie() {
                         </div>
                     </div>
 
-                    <div className="col-4">
+                    <div className="col-10 col-md-3">
                         <div className="px-2 mt-4">
                             <p className="fs-3 fw-bolder">{movie.title}</p>
                             <div className="mt-2">
-                                <ul className="d-flex">{
+                                <ul className="d-flex flex-wrap">{
                                     movie.genres.map((genre, index) => (
                                         <li className="fs-6 text-primary genre-bg px-3 py-1 rounded-5" key={index}>
                                             {genre}
@@ -39,9 +39,11 @@ function Movie() {
 
                             <div className="mt-4 fs-5">
                                 <p className="mb-2 fw-semibold">Cast </p>
-                                <p className="">Sylvester Stalone </p>
-                                <p className="">Jackie Chan</p>
-                                <p className="">Jada Pinkett</p>
+                                <div className="d-flex flex-wrap d-md-block">
+                                    <p className="pe-3">Sylvester Stalone </p>
+                                    <p className="pe-3">Jackie Chan</p>
+                                    <p className="pe-3">Jada Pinkett</p>
+                                </div>
 
                                 {/* <ul className="fs-5">{
                                     movie.genres.map((genre, index) => (

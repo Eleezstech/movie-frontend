@@ -1,5 +1,6 @@
 import React from "react";
 import Movie from "../../components/movie/movie";
+import './home.css'
 
 const Home = ({movies}) => {
     return (
@@ -9,8 +10,7 @@ const Home = ({movies}) => {
                     {movies && movies.map((movie) => (
                         <div 
                             key={movie.imdbId}
-                            className="width"
-                            style={{ width: "20%" }}
+                            className="col-5 col-sm-2"
                         >
                             <Movie 
                                 movie={movie} 

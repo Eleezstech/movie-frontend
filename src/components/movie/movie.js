@@ -4,7 +4,7 @@ import './movie.css';
 function Movie({movie}) {
 
     return (
-        <div className="my-4 movie-container">
+        <div className="my-3 my-md-4 movie-container">
             <Link 
                 to={`/movie/${movie.imdbId}`}
                 state = { movie }
