@@ -12,9 +12,7 @@ const Home = ({movies}) => {
                             key={movie.imdbId}
                             className="col-5 col-sm-2"
                         >
-                            <Movie 
-                                movie={movie} 
-                            />
+                            <Movie movie={movie}/>
                         </div>
                     ))}
                 </div>
