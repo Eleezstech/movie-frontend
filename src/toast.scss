@@ -1,0 +1,24 @@
+:root {
+    --toastify-color-success: #3fcb25;
+    --toastify-color-error: #e70000;
+}
+
+.Toastify__toast {
+    border-radius: 12px;
+    
+    background-color: #0e171b !important;
+}
+
+.Toastify__toast-body {
+    font-size: 14px;
+    font-weight: 500
+}
+
+.Toastify__progress-bar--success {
+    background-color: #3fcb25;
+}
+
+.Toastify__progress-bar--error {
+    border-color: 2px solid #e70000;
+}
+@import "react-toastify/dist/ReactToastify.css";
