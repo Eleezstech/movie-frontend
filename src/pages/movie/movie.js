@@ -1,15 +1,69 @@
 import "./movie.css";
-import { useLocation } from "react-router-dom";
-import ReactPlayer from 'react-player';
+import { useParams } from "react-router-dom";
+import ReactPlayer from "react-player";
+import { useState, useEffect } from "react";
+import api from "../../api/axiosConfig"
+import { ToastContainer, toast } from 'react-toastify';
 
 function Movie() {
-    const location = useLocation();
-    const movie = location.state;
+    let movieId = useParams().id;
+
+    const [username, setUsername] = useState("");
+    const [body, setBody] = useState("");
+
+    const [movie, setMovie] = useState(null)
+    const [isReviewUpdated, setIsReviewUpdated] = useState(false)
+
+    useEffect(() => {
+        fetchMovie(movieId);
+    }, [isReviewUpdated])
+
+    const createReview = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await api.post("/api/v1/movies/review", {
+                "username": username,
+                "reviewBody": body,
+                "imdbId": movie.imdbId,
+            })
+
+            setIsReviewUpdated(true)
+            setBody("")
+
+            toast.success("Your review was successfully added.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark"
+            });
+
+        } catch (error) {
+            toast.error("Unsuccessful. Please, try again.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark"
+            });
+        }
+    }
+
+    const fetchMovie = async (movieId) => {
+        const res = await api.get(`/api/v1/movies/imdb/${movieId}`)
+        setMovie(res.data)
+    }
 
     return (
-        <div className="mt-5 text-light">
+        <div className="my-5 text-light">
             <div className="container">
-                <div className="row">
+                {movie && <div className="row">
                     <div className="col-10 col-md-7">
                         <div className="player-wrapper">
                             <ReactPlayer 
@@ -25,7 +79,7 @@ function Movie() {
                     </div>
 
                     <div className="col-10 col-md-3">
-                        <div className="px-2 mt-4">
+                        <div className="px-2">
                             <p className="fs-3 fw-bolder">{movie.title}</p>
                             <div className="mt-2">
                                 <ul className="d-flex flex-wrap">{
@@ -44,14 +98,6 @@ function Movie() {
                                     <p className="pe-3">Jackie Chan</p>
                                     <p className="pe-3">Jada Pinkett</p>
                                 </div>
-
-                                {/* <ul className="fs-5">{
-                                    movie.genres.map((genre, index) => (
-                                        <li className="" key={index}>
-                                            {genre}
-                                        </li>
-                                    ))}
-                                </ul> */}
                             </div>
 
                             <div className="mt-4 fs-5">
@@ -60,14 +106,64 @@ function Movie() {
                             </div>
                         </div>
                     </div>
+                </div>}
+            </div>
+
+            <div className="container">
+                <div className="row">
+                {movie && 
+                    <div className="mt-5 col-10 col-md-5">
+                        <p className="fs-3 fw-bolder">{movie.reviews.length} Reviews</p>
+
+                        <div className="fs-5">{
+                            movie.reviews.map((review, index) => (
+                                <div className="py-2" key={index}>
+                                    <span className="pe-3 fw-bolder text-primary-emphasis">{review.username? review.username : "Anonymous"}</span> 
+                                    <span className="fs-6 text-primary-emphasis">{review.id.date}</span>
+                                    <p className="pt-2">{review.body}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>}
+
+                    <div className="mt-5 col-10 col-md-5">
+                        <div className="my-2 py-5 px-5 rounded-2" style={{backgroundColor: "#132126"}}>
+                            <p className="fs-3 fw-bolder">Review this movie</p>
+
+                            <form onSubmit={createReview} className="fs-5 mt-4">
+                                <div className="mb-3">
+                                    <label htmlFor="username" className="form-label">What's your username</label>
+                                    <input 
+                                        type="text" 
+                                        className="form-control" 
+                                        id="username" 
+                                        placeholder="username"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
+                                </div>
+                                
+                                <div className="mb-3">
+                                    <label htmlFor="exampleFormControreviewBodylTextarea1" className="form-label">What's your review</label>
+                                    <textarea
+                                        className="form-control" 
+                                        id="reviewBody" 
+                                        rows="3"
+                                        value={body}
+                                        onChange={(e) => setBody(e.target.value)}
+                                    ></textarea>
+                                </div>
+
+                                <div className="d-grid mt-4">
+                                    <button className="btn btn-primary fw-2 fw-bold" type="submit">Submit review</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* <div>
-                <div>
-                    <p>Reviews</p>
-                </div>
-            </div> */}
+            <ToastContainer />
         </div>
     );
 }

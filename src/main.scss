@@ -8,4 +8,14 @@ p{
     margin-bottom: .25rem !important;
 }
 
+.form-control {
+    background-color: transparent !important;
+    color: #b5b5b5 !important;
+    border-color: #ffc30445 !important;
+}
+
+.toast-container {
+    position: fixed !important;
+}
+
 @import 'bootstrap/scss/bootstrap';
